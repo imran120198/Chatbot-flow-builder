@@ -1,0 +1,23 @@
+.node-text-container {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 16vw;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b8f4fb;
+  padding: 10px;
+}
+.msg-icon {
+  margin-right: 0.5rem;
+}
+.whatsapp-icon {
+  color: #25d366;
+}
+.node-text-body {
+  padding: 0.6rem;
+}

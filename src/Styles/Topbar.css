@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.save-btn-container {
+  position: absolute;
+  right: 5rem;
+  top: 1rem;
+}
