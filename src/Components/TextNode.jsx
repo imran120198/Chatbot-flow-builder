@@ -3,7 +3,7 @@ import { Handle, Position } from "reactflow";
 import { FaWhatsapp, FaCommentDots } from "react-icons/fa";
 import "../Styles/TextNode.css";
 
-const TextNode = () => {
+const TextNode = ({data}) => {
   return (
     <>
       <Handle type="target" position={Position.Left} />
@@ -14,7 +14,7 @@ const TextNode = () => {
           <FaWhatsapp className="whatsapp-icon" />
         </div>
         <div className="node-text-body">
-          {/* <p>{data?.label}</p> */}
+          <p>{data?.label}</p>
         </div>
       </div>
       <Handle type="source" position={Position.Right} id="a" />

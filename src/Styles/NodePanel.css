@@ -1,0 +1,61 @@
+.msg-container {
+  width: 25%;
+  border-left: 1px solid #ddd;
+}
+
+.nodes-panel {
+  padding: 10px;
+}
+
+.dndnode {
+  background: #fff;
+  border: 1px solid #5a55f3;
+  border-radius: 4px;
+  cursor: grab;
+  min-height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #5a55f3;
+  width: 70%;
+}
+
+.selected-container {
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  padding: 0 0 1rem 0;
+}
+
+.selected-header {
+  padding-left: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+.selected-container p {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.input-container {
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.input-header {
+  color: #a8a4a4;
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+}
+
+.back-icon {
+  cursor: pointer;
+}
+
+.input-container input {
+  width: 80%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

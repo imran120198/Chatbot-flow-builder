@@ -1,10 +1,11 @@
 import "./App.css";
-import FlowCart from "./Components/FlowCart";
+import FlowChart from "./Components/FlowChart";
+
 
 function App() {
   return (
     <div className="App">
-      <FlowCart />
+      <FlowChart />
     </div>
   );
 }
