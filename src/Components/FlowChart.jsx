@@ -8,9 +8,10 @@ import ReactFlow, {
   useEdgesState,
 } from "reactflow";
 import "reactflow/dist/style.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { initialNodes } from "../Constant";
 import { getId } from "../Utils";
-import CustomAlert from "./CustomAlert";
 import NodesPanel from "./NodesPanel";
 import Topbar from "./Topbar";
 import nodeTypes from "../config/nodeTypes";
@@ -22,23 +23,9 @@ function FlowChart() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = useState(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const [alertMessage, setAlertMessage] = useState("");
 
   const onConnect = useCallback(
-    (params) => {
-      setEdges((eds) => {
-        const newEdges = addEdge(params, eds);
-        const targetNodeConnections = newEdges.filter(
-          (edge) => edge.target === params.target
-        );
-
-        if (targetNodeConnections.length > 1) {
-          setAlertMessage(`Node ${params.target} is connected to multiple nodes!`);
-        }
-
-        return newEdges;
-      });
-    },
+    (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
 
@@ -100,26 +87,41 @@ function FlowChart() {
     setSelectedNode(null);
   };
 
-  const closeAlert = () => {
-    setAlertMessage("");
-  };
+  const handleSave = () => {
+    const nodesWithEmptyTargets = nodes.filter((node) => {
+      const isSource = edges.some((edge) => edge.source === node.id);
+      const isTarget = edges.some((edge) => edge.target === node.id);
+      return !isTarget && isSource;
+    });
 
-  const handleSave = useCallback(() => {
-    const nodesWithoutTarget = nodes.filter(
-      (node) => !edges.find((edge) => edge.source === node.id)
-    );
-    if (nodesWithoutTarget.length > 1) {
-      setAlertMessage(
-        "Cannot save flow! More than one node with empty target handles"
-      );
-    } else {
-      setAlertMessage("Flow saved successfully!");
-      console.log("Flow saved");
+    if (nodesWithEmptyTargets.length > 1) {
+      toast.error("Node has empty target handles.", {
+        position: "top-center",
+      });
+      return;
     }
-  }, [nodes, edges]);
+
+    const textNodes = nodes.filter((node) => node.type === "textNode");
+    const connectedTextNodes = textNodes.every((node) =>
+      edges.some((edge) => edge.source === node.id || edge.target === node.id)
+    );
+
+    if (!connectedTextNodes) {
+      toast.error("Node has empty target handles ", {
+        position: "top-center",
+      });
+      return;
+    }
+    toast.success("Flow Saved", {
+      position: "top-center",
+    });
+
+    setSelectedNode(null);
+  };
 
   return (
     <div className="App">
+      <ToastContainer />
       <Topbar handleSave={handleSave} />
       <div className="flow-builder">
         <ReactFlowProvider>
@@ -145,9 +147,6 @@ function FlowChart() {
             setSelectedNode={setSelectedNode}
             handleUpdateNodeLabel={handleUpdateNodeLabel}
           />
-          {alertMessage && (
-            <CustomAlert message={alertMessage} onClose={closeAlert} />
-          )}
         </ReactFlowProvider>
       </div>
     </div>

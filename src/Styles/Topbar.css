@@ -5,10 +5,26 @@
   width: 100%;
   border-bottom: 1px solid #ddd;
   position: relative;
+  background-color: #f4f3f2;
+  height: 80px;
 }
 
 .save-btn-container {
   position: absolute;
   right: 5rem;
   top: 1rem;
+}
+
+.btn-save {
+  border: 2px solid blue;
+  padding: 10px 20px;
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  border-color: #007bff;
+  background-color: white;
+  margin: 10px;
+  
 }
